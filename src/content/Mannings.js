@@ -1,5 +1,6 @@
-import { CardGiftcardTwoTone, Celebration, CelebrationTwoTone, HistoryEdu, HistoryEduTwoTone, Restaurant, RestaurantMenuTwoTone, WineBar, WineBarTwoTone } from "@mui/icons-material";
-import video from "./img/ManningsVideo.mp4";
+import { CardGiftcardTwoTone, CelebrationTwoTone, HistoryEduTwoTone, RestaurantMenuTwoTone, WineBarTwoTone } from "@mui/icons-material";
+import video from "../img/ManningsVideo.mp4";
+
 export const Mannings = {
   fullName: "Manning's Steaks & Spirits",
   hours: "Tuesday - Sunday. 11am - 9:30pm<br/>Closed Monday",
@@ -12,11 +13,11 @@ export const Mannings = {
   takeoutLink:
     "https://order.toasttab.com/online/mannings-steaks-and-spirits#!/",
   noveltyLink: "https://www.toasttab.com/mannings-steaks-and-spirits/giftcards",
-  mainLogo: require("./img/Mannings_Logo_Manning's Dark_edited_edited.png"),
-  navLogo: require("./img/Mannings_Logo_One Color White.png"),
-  heroImg: `url(${require("./img/Food12.png")})`,
+  mainLogo: require("../img/Mannings_Logo_Manning's Dark_edited_edited.png"),
+  navLogo: require("../img/Mannings_Logo_One Color White.png"),
+  heroImg: `url(${require("../img/Food12.png")})`,
   heroVideo: video,
-  heroVideoPoster: require("./img/Sign1.jpg"),
+  heroVideoPoster: require("../img/Sign1.jpg"),
   content: [
     {
       title: "Manning's Steaks & Spirits",
@@ -38,7 +39,7 @@ export const Mannings = {
     </a>${" "}
     for updates and irresistible glimpses into the world of
     Manning's Steaks and Spirits. Bon appétit!`,
-      contentImg: `url(${require("./img/Menu2.jpg")})`,
+      contentImg: `url(${require("../img/Menu2.jpg")})`,
       cta: "menu",
       ctaLink: "./mannings-food.pdf",
       ctaDownload: true,
@@ -47,7 +48,7 @@ export const Mannings = {
       title: "The Bar",
       titleIcon: <WineBarTwoTone />,
       content: `Manning's Steaks and Spirits sets an unparalleled standard with its top-notch bar program, elevating the art of mixology and beverage selection to remarkable heights. Renowned for its hand-crafted cocktails that blend innovation with timeless classics, the bar program is a true testament to the dedication of skilled mixologists who craft each drink with meticulous attention to detail. Moreover, Manning's boasts an exquisite collection of the finest wines, whiskeys, and tequilas, curated to cater to the most discerning palates. With an exceptional array of choices, patrons are invited to indulge in a sensory journey that celebrates the epitome of taste and refinement.`,
-      contentImg: `url(${require("./img/Bar5.jpg")})`,
+      contentImg: `url(${require("../img/Bar5.jpg")})`,
       cta: "cocktails",
       ctaLink: "./mannings-cocktails.jpeg",
       ctaDownload: true,
@@ -62,7 +63,7 @@ export const Mannings = {
     title: "Happy Hour",
     titleIcon: <CelebrationTwoTone />,
     content: `Manning's Steaks and Spirits invites you to our unbeatable Happy Hour from 2 PM to 5 PM daily. Enjoy $3.50 Coors Banquet and Outlaw Light Lager, $4 House Spirits with a mixer of your choice, and $5 specials on wines, craft beer, and cocktails like the House Manhattan and Moscow Mule. Pair your drinks with $7 appetizers, including Crab Cakes and loaded Potato Skins. Join us and make your evenings happier!`,
-    contentImg: `url(${require("./img/Cocktail21.jpg")})`,
+    contentImg: `url(${require("../img/Cocktail21.jpg")})`,
     cta: "happy hour",
     ctaLink: "./mannings-happy-hour.jpeg",
     ctaDownload: true,
@@ -74,7 +75,7 @@ export const Mannings = {
       our convenient takeout ordering service. Indulge in the same
       exceptional flavors and quality you love, now available for
       pickup. Click the link below to start your order or give us a call at 720.484.6567 and we can place the order for you. Elevate your evening at home with Manning's take out`,
-      contentImg: `url(${require("./img/Food23.jpg")})`,
+      contentImg: `url(${require("../img/Food23.jpg")})`,
       cta: "Order Now",
       ctaLink:
         "https://www.toasttab.com/mannings-steaks-and-spirits/v2/online-order#!",
@@ -84,7 +85,7 @@ export const Mannings = {
       title: "Manning's Gift Cards",
       titleIcon: <CardGiftcardTwoTone />,
       content: `Express your appreciation for exceptional dining experiences by sending the gift of Manning's Steaks and Spirits through our E-Gift Cards. Whether it's for a special occasion, a gesture of gratitude, or simply to share the joy of indulgence, our E-Gift Cards are a wonderful way to spread the love of remarkable cuisine and hand-crafted cocktails. Let your friends, family, or colleagues discover the delight of Manning's and create cherished memories. Share the love today by sending an E-Gift Card their way.`,
-      contentImg: `url(${require("./img/Food27.jpg")})`,
+      contentImg: `url(${require("../img/Food27.jpg")})`,
       cta: "Order E-Gift Card",
       ctaLink: "https://www.toasttab.com/mannings-steaks-and-spirits/giftcards",
       ctaDownload: false,
@@ -122,7 +123,7 @@ export const Mannings = {
       the restaurant and having conversations with patrons. His larger-than-life personality
       makes him a hospitality natural, and he truly loves being a part of the Lakewood
       restaurant community.`,
-      contentImg: `url(${require("./img/Decor2.jpg")})`,
+      contentImg: `url(${require("../img/Decor2.jpg")})`,
     },
   ],
 };

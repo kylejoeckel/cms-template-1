@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { StyledButton } from "./StyledButton";
-import { Mannings } from "../Mannings";
+import { Mannings } from "../content/Mannings";
 import { PhoneInTalk, Restaurant } from "@mui/icons-material";
 
 export const FixedAppBar = () => {
@@ -26,7 +26,7 @@ export const FixedAppBar = () => {
   React.useEffect(() => {
     if (window.screen.width <= theme.breakpoints.values.md) setMobile(true);
     if (window.screen.width >= theme.breakpoints.values.md) setMobile(false);
-  }, [window.screen.width]);
+  }, [theme.breakpoints.values.md]);
   function ElevationScroll(props) {
     const { children } = props;
 
@@ -84,6 +84,7 @@ export const FixedAppBar = () => {
             <img
               style={{ maxHeight: mobile ? "80px" : "100px" }}
               src={Mannings.navLogo}
+              alt="Manning's Steaks and Spirits Logo"
             ></img>
             <div style={{ display: "flex" }}>
               <StyledButton

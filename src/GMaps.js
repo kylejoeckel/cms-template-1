@@ -1,13 +1,10 @@
 import {
   GoogleMap,
-  Marker,
-  InfoWindow,
-  InfoBox,
   useLoadScript,
 } from "@react-google-maps/api";
 import { useMemo } from "react";
 import "./App.css";
-import { Mannings } from "./Mannings";
+import { Mannings } from "./content/Mannings";
 
 const GoogleMaps = () => {
   const { isLoaded, loadError } = useLoadScript({
