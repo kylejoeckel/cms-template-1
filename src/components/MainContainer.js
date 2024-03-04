@@ -163,7 +163,7 @@ export const MainContainer = () => {
                   >
                     Reservations
                   </StyledButton>
-                  <StyledButton
+                  {/* <StyledButton
                     fullWidth
                     color="primary"
                     variant="outlined"
@@ -171,7 +171,7 @@ export const MainContainer = () => {
                     onClick={() => setContactModalOpen(true)}
                   >
                     Message Us
-                  </StyledButton>
+                  </StyledButton> */}
                 </Card>
               </div>
             </Card>
