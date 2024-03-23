@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { StyledButton } from "./StyledButton";
-import { Mannings } from "../content/Mannings";
+import { RestaurantInfo } from "../content/RestaurantInfo";
 import { PhoneInTalk, Restaurant } from "@mui/icons-material";
 
 export const FixedAppBar = () => {
@@ -73,24 +73,24 @@ export const FixedAppBar = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={() => window.open(Mannings.takeoutLink, '_self')}>
+              <MenuItem onClick={() => window.open(RestaurantInfo.takeoutLink, '_self')}>
                 Order Food
               </MenuItem>
               <MenuItem>
-               <a style={{textDecoration: 'none'}} href="./mannings-food.pdf" download="ManningsFood">View Menu</a>
+               <a style={{textDecoration: 'none'}} href="./mannings-food.pdf" download="RestaurantInfoFood">View Menu</a>
 
               </MenuItem>
             </Menu>
             <img
               style={{ maxHeight: mobile ? "80px" : "100px" }}
-              src={Mannings.navLogo}
+              src={RestaurantInfo.navLogo}
               alt="Manning's Steaks and Spirits Logo"
             ></img>
             <div style={{ display: "flex" }}>
               <StyledButton
                 color="secondary"
                 variant="text"
-                href={`tel:${Mannings.phone}`}
+                href={`tel:${RestaurantInfo.phone}`}
               >
                 <PhoneInTalk style={{ marginRight: mobile ? "0" : "4px" }} />
                 {!mobile && `Contact us`}

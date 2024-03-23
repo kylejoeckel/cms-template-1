@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Mannings } from "../content/Mannings";
+import { RestaurantInfo } from "../content/RestaurantInfo";
 import { LocationCity, Phone, PunchClock } from "@mui/icons-material";
 import { StyledButton } from "./StyledButton";
 import { Card, useTheme } from "@mui/material";
@@ -33,8 +33,8 @@ export const ContactCard = ({ mobile }) => {
       >
         <img
           style={{ width: "80%", margin: "0 auto 24px" }}
-          src={Mannings.mainLogo}
-          alt="Mannings Logo"
+          src={RestaurantInfo.mainLogo}
+          alt="RestaurantInfo Logo"
         />
         <Card
           elevation={0}
@@ -72,7 +72,7 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: Mannings.hours }} />
+              <span dangerouslySetInnerHTML={{ __html: RestaurantInfo.hours }} />
             </div>
           </div>
           <div
@@ -98,7 +98,7 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: Mannings.address }} />
+              <span dangerouslySetInnerHTML={{ __html: RestaurantInfo.address }} />
             </div>
           </div>
           <div
@@ -124,14 +124,14 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: Mannings.phone }} />
+              <span dangerouslySetInnerHTML={{ __html: RestaurantInfo.phone }} />
             </div>
           </div>
           <StyledButton
             fullWidth
             color="primary"
             variant="outlined"
-            href={Mannings.reservationLink}
+            href={RestaurantInfo.reservationLink}
           >
             Reservations
           </StyledButton>

@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import FeedbackSnackbar from './FeedbackSnackbar';
 import CustomTextField from './CustomTextField';
+import { RestaurantInfo } from "../content/RestaurantInfo";
 
 export const ContactModal = ({ open, setOpen }) => {
   const initialState = {
@@ -65,14 +66,10 @@ export const ContactModal = ({ open, setOpen }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from_address: `Website Message <{info@manningsinc.com}>`,
-          to_address: "info@manningsinc.com",
+          from_address: `Website Message <mail@${RestaurantInfo.domainName}>`,
+          to_address: RestaurantInfo.contactEmail,
           subject: `${formValues.name} - ${formValues.email}`,
-          body: formValues.message,
-          smtp_server: process.env.REACT_APP_SMTP_HOST,
-          smtp_port: process.env.REACT_APP_SMTP_PORT,
-          smtp_username: process.env.REACT_APP_SMTP_USER,
-          smtp_password: process.env.REACT_APP_SMTP_PASS,
+          body: formValues.message
         }),
       });
 

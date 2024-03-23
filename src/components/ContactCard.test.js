@@ -5,8 +5,8 @@ import { ContactCard } from './ContactCard';
 test('renders contact card with correct content', () => {
   render(<ContactCard mobile={false} />)
   
-  // Assert that the Mannings logo is rendered
-  const logoElement = screen.getByAltText('Mannings Logo');
+  // Assert that the RestaurantInfo logo is rendered
+  const logoElement = screen.getByAltText('RestaurantInfo Logo');
   expect(logoElement).toBeInTheDocument();
 
   // Assert that the contact information is rendered

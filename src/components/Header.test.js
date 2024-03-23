@@ -17,7 +17,7 @@ test('renders header component', () => {
 //   expect(videoElement).toBeInTheDocument();
   
 //   // Assert that the video element has the correct attributes
-//   expect(videoElement).toHaveAttribute('poster', Mannings.heroVideoPoster);
+//   expect(videoElement).toHaveAttribute('poster', RestaurantInfo.heroVideoPoster);
 //   expect(videoElement).toHaveAttribute('autoPlay');
 //   expect(videoElement).toHaveAttribute('loop');
 //   expect(videoElement).toHaveAttribute('muted');
@@ -28,6 +28,6 @@ test('renders header component', () => {
 //   // Assert that the video element has a source element with the correct attributes
 //   const sourceElement = screen.getByRole('source');
 //   expect(sourceElement).toBeInTheDocument();
-//   expect(sourceElement).toHaveAttribute('src', Mannings.heroVideo);
+//   expect(sourceElement).toHaveAttribute('src', RestaurantInfo.heroVideo);
 //   expect(sourceElement).toHaveAttribute('type', 'video/mp4');
 // });

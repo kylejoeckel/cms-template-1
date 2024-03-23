@@ -4,14 +4,14 @@ import {
 } from "@react-google-maps/api";
 import { useMemo } from "react";
 import "./App.css";
-import { Mannings } from "./content/Mannings";
+import { RestaurantInfo } from "./content/RestaurantInfo";
 
 const GoogleMaps = () => {
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyCWJ6Xj4OVvTmKuUrOM3AbPX-KEO0J-Y5Y",
     id: "a552e243fbe9d8ae",
   });
-  const center = useMemo(() => ({ lat: Mannings.lat, lng: Mannings.long }), []);
+  const center = useMemo(() => ({ lat: RestaurantInfo.lat, lng: RestaurantInfo.long }), []);
 
   return loadError ? (
     <></>

@@ -1,13 +1,21 @@
-import { CardGiftcardTwoTone, CelebrationTwoTone, HistoryEduTwoTone, RestaurantMenuTwoTone, WineBarTwoTone } from "@mui/icons-material";
+import {
+  CardGiftcardTwoTone,
+  CelebrationTwoTone,
+  HistoryEduTwoTone,
+  RestaurantMenuTwoTone,
+  WineBarTwoTone,
+} from "@mui/icons-material";
 import video from "../img/ManningsVideo.mp4";
 
-export const Mannings = {
+export const RestaurantInfo = {
   fullName: "Manning's Steaks & Spirits",
   hours: "Tuesday - Sunday. 11am - 9:30pm<br/>Closed Monday",
   address: "11100 W Alameda Ave<br />Lakewood, Colorado 80226",
   phone: "(720) 484-6567",
   lat: 39.71043,
   long: -105.12297,
+  domainName: "manningssteaksandspirits.com",
+  contactEmail: "info@manningsinc.com",
   reservationLink:
     "https://resy.com/cities/lkw/mannings-steaks-and-spirits?date=2023-08-26&seats=2",
   takeoutLink:
@@ -21,22 +29,22 @@ export const Mannings = {
   content: [
     {
       title: "Manning's Steaks & Spirits",
-      content: `Where culinary excellence meets a vibrant and inviting atmosphere. Our menu boasts a variety of delights for all palates, from a tender filet to a bold Buffalo Tomahawk, hearty seafood pastas, and creative burgers & sandwiches. Whatever your occasion, Manning's welcomes you into our fun, friendly, family-owned dining experience. Follow us on${" "}
+      content: `Where culinary excellence meets a vibrant and inviting atmosphere. Our menu boasts a variety of delights for all palates, from a tender filet to a bold Buffalo Tomahawk, hearty seafood pastas, and creative burgers & sandwiches. Whatever your occasion, Manning's welcomes you into our fun, friendly, family-owned dining experience. Follow us on 
     <a
       href="https://www.facebook.com/manningssteaks"
       target="_blank"
       rel="noreferrer"
     >
-      Facebook
-    </a>${" "}
-    and${" "}
+      Facebook 
+    </a> 
+    and 
     <a
       href="https://www.instagram.com/mannings_steaks_and_spirits"
       target="_blank"
       rel="noreferrer"
     >
       Instagram
-    </a>${" "}
+    </a>  
     for updates and irresistible glimpses into the world of
     Manning's Steaks and Spirits. Bon appétit!`,
       contentImg: `url(${require("../img/Menu2.jpg")})`,
@@ -59,15 +67,15 @@ export const Mannings = {
       cta3Link: "./mannings-drink.pdf",
       cta3Download: true,
     },
-  {
-    title: "Happy Hour",
-    titleIcon: <CelebrationTwoTone />,
-    content: `Manning's Steaks and Spirits invites you to our unbeatable Happy Hour from 2 PM to 5 PM daily. Enjoy $3.50 Coors Banquet and Outlaw Light Lager, $4 House Spirits with a mixer of your choice, and $5 specials on wines, craft beer, and cocktails like the House Manhattan and Moscow Mule. Pair your drinks with $7 appetizers, including Crab Cakes and loaded Potato Skins. Join us and make your evenings happier!`,
-    contentImg: `url(${require("../img/Cocktail21.jpg")})`,
-    cta: "happy hour",
-    ctaLink: "./mannings-drink.pdf",
-    ctaDownload: true,
-  },
+    {
+      title: "Happy Hour",
+      titleIcon: <CelebrationTwoTone />,
+      content: `Manning's Steaks and Spirits invites you to our unbeatable Happy Hour from 2 PM to 5 PM daily. Enjoy $3.50 Coors Banquet and Outlaw Light Lager, $4 House Spirits with a mixer of your choice, and $5 specials on wines, craft beer, and cocktails like the House Manhattan and Moscow Mule. Pair your drinks with $7 appetizers, including Crab Cakes and loaded Potato Skins. Join us and make your evenings happier!`,
+      contentImg: `url(${require("../img/Cocktail21.jpg")})`,
+      cta: "happy hour",
+      ctaLink: "./mannings-drink.pdf",
+      ctaDownload: true,
+    },
     {
       title: "Manning's To Go",
       titleIcon: <RestaurantMenuTwoTone />,
@@ -92,7 +100,7 @@ export const Mannings = {
     },
     {
       title: "About Manning’s",
-      titleIcon: <HistoryEduTwoTone/>,
+      titleIcon: <HistoryEduTwoTone />,
       content: `Manning’s Steaks and Spirits opened on December 5, 2018 by owners Diane Manning
       and her son Michael Manning.
       Diane got her start in hospitality at age 15 at a coffee shop cafe in a Days Inn hotel. By

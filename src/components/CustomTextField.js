@@ -11,7 +11,6 @@ const CustomTextField = ({ id, name, label, type, value, onChange, multiline, ro
       name={name}
       label={label}
       type={type}
-      variant="standard"
       InputLabelProps={{ sx: { color: 'black' } }}
       value={value}
       onChange={onChange}

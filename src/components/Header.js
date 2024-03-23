@@ -1,4 +1,4 @@
-import { Mannings } from "../content/Mannings";
+import { RestaurantInfo } from "../content/RestaurantInfo";
 import { FixedAppBar } from "./FixedAppBar";
 
 export const Header = () => {
@@ -11,7 +11,7 @@ export const Header = () => {
       >
         <video
           className="videoTag"
-          poster={Mannings.heroVideoPoster}
+          poster={RestaurantInfo.heroVideoPoster}
           autoPlay
           loop
           muted
@@ -21,7 +21,7 @@ export const Header = () => {
         >
           <source
             style={{ width: "100vw" }}
-            src={Mannings.heroVideo}
+            src={RestaurantInfo.heroVideo}
             type="video/mp4"
           />
         </video>
