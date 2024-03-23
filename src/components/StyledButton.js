@@ -12,12 +12,12 @@ export const StyledButton = ({ children, color, href, ...props }) => {
         style={{
           borderColor:
             color === "primary"
-              ? customTheme.palette.action.active
-              : customTheme.palette.primary.main,
+              ? customTheme.palette?.action?.active
+              : customTheme.palette?.primary?.main,
           color:
             color === "primary"
-              ? customTheme.palette.action.active
-              : customTheme.palette.primary.main,
+              ? customTheme.palette?.action.active
+              : customTheme.palette?.primary.main,
         }}
         {...props}
       >

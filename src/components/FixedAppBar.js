@@ -24,9 +24,9 @@ export const FixedAppBar = () => {
   const [mobile, setMobile] = React.useState(false);
   const theme = useTheme();
   React.useEffect(() => {
-    if (window.screen.width <= theme.breakpoints.values.md) setMobile(true);
-    if (window.screen.width >= theme.breakpoints.values.md) setMobile(false);
-  }, [theme.breakpoints.values.md]);
+    if (window.screen.width <= theme.breakpoints?.values.md) setMobile(true);
+    if (window.screen.width >= theme.breakpoints?.values.md) setMobile(false);
+  }, [theme.breakpoints?.values.md]);
   function ElevationScroll(props) {
     const { children } = props;
 

@@ -1,75 +1,152 @@
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogActions,
   Button,
   DialogTitle,
   DialogContent,
-  TextField,
   DialogContentText,
+  CircularProgress,
 } from "@mui/material";
+import FeedbackSnackbar from './FeedbackSnackbar';
+import CustomTextField from './CustomTextField';
 
-export const ContactModal = ({open, setOpen}) => {
-  return (
-    <Dialog
-      open={open}
-      onClose={() => setOpen(false)}
-      PaperProps={{
-        component: "form",
-        onSubmit: (event) => {
-          event.preventDefault();
-          const formData = new FormData(event.currentTarget);
-          const formJson = Object.fromEntries(formData.entries());
-          const email = formJson.email;
-          console.log(email);
-          setOpen(false);
+export const ContactModal = ({ open, setOpen }) => {
+  const initialState = {
+    name: "",
+    email: "",
+    message: "",
+  };
+
+  const [formValues, setFormValues] = useState(initialState);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
+
+  useEffect(() => {
+    const isValid = formValues.name.trim() && formValues.email.includes('@') && formValues.message.trim();
+    setIsFormValid(isValid);
+  }, [formValues]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues(prevValues => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+
+  const resetForm = () => {
+    setFormValues(initialState);
+    setIsFormValid(false);
+  };
+
+  const handleClose = () => {
+    resetForm();
+    setOpen(false);
+  };
+
+  const sendMail = async (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(process.env.REACT_APP_SMTP_ENDPOINT + 'dev/send_email', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }}
-    >
-      <DialogTitle>Message us</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          How can we help you? Send us a note with your contact info and we'll
-          be sure to get back with you as soon as we can!
-        </DialogContentText>
-        <TextField
-          autoFocus
-          required
-          margin="dense"
-          id="name"
-          name="name"
-          label="Contact name"
-          type="text"
-          fullWidth
-          variant="standard"
-        />
-        <TextField
-          autoFocus
-          required
-          margin="dense"
-          id="name"
-          name="email"
-          label="Email Address"
-          type="email"
-          fullWidth
-          variant="standard"
-        />
-        <TextField
-          autoFocus
-          required
-          margin="dense"
-          id="message"
-          name="message"
-          multiline
-          label="Message"
-          type="text"
-          fullWidth
-          variant="standard"
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => setOpen(false)}>Cancel</Button>
-        <Button type="submit">Send</Button>
-      </DialogActions>
-    </Dialog>
+        body: JSON.stringify({
+          from_address: `Website Message <{info@manningsinc.com}>`,
+          to_address: "info@manningsinc.com",
+          subject: `${formValues.name} - ${formValues.email}`,
+          body: formValues.message,
+          smtp_server: process.env.REACT_APP_SMTP_HOST,
+          smtp_port: process.env.REACT_APP_SMTP_PORT,
+          smtp_username: process.env.REACT_APP_SMTP_USER,
+          smtp_password: process.env.REACT_APP_SMTP_PASS,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Failed to send email.");
+      setSnackbar({ open: true, message: "Message sent successfully!", severity: 'success' });
+      handleClose();
+    } catch (error) {
+      setSnackbar({ open: true, message: error.message || "Error sending message.", severity: 'error' });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <Dialog open={open} onClose={handleClose} PaperProps={{
+        component: "form",
+        onSubmit: sendMail,
+        noValidate: true,
+        sx: {
+          backgroundColor: "white",
+          margin: "12px",
+          borderRadius: "16px",
+          padding: "16px 0px 0px 0px",
+        },
+      }}>
+        <DialogTitle sx={{fontWeight: 'bold', margin: '8px 12px'}}>How can we help?</DialogTitle>
+        <DialogContent sx={{borderTop: 'solid 2px rgba(0,0,0,0.3)', padding: '32px'}}>
+          <DialogContentText sx={{color: "black", marginTop: '24px'}}>
+            Send us a note with your contact info and we'll be sure to get back with you as soon as we can!
+          </DialogContentText>
+          <CustomTextField
+            id="name"
+            name="name"
+            label="Name"
+            type="text"
+            value={formValues.name}
+            onChange={handleInputChange}
+          />
+          <CustomTextField
+            id="email"
+            name="email"
+            label="Email Address"
+            type="email"
+            value={formValues.email}
+            onChange={handleInputChange}
+          />
+          <CustomTextField
+            id="message"
+            name="message"
+            label="Message"
+            type="text"
+            multiline
+            rows={4}
+            value={formValues.message}
+            onChange={handleInputChange}
+          />
+        </DialogContent>
+        <DialogActions sx={{padding: '12px 32px'}}>
+          <Button onClick={handleClose} color="secondary">Cancel</Button>
+          <Button type="submit" disabled={!isFormValid || isLoading} color="primary">
+            {isLoading ? <CircularProgress size={24} /> : "Send"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+      <FeedbackSnackbar
+        open={snackbar.open}
+        handleClose={handleCloseSnackbar}
+        message={snackbar.message}
+        severity={snackbar.severity}
+      />
+    </>
   );
 };
+
+export default ContactModal;
