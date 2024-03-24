@@ -8,7 +8,7 @@ import {
   useScrollTrigger,
 } from "@mui/material";
 import React from "react";
-import { StyledButton } from "../StyledButton/StyledButton";
+import { StyledButton } from "../StyledButton";
 import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { PhoneInTalk, Restaurant } from "@mui/icons-material";
 
@@ -65,7 +65,7 @@ export const FixedAppBar = () => {
             </StyledButton>
             <Menu
               id="basic-menu"
-              sx={{marginTop: '54px', marginLeft: '12px'}}
+              sx={{ marginTop: "54px", marginLeft: "12px" }}
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
@@ -73,12 +73,19 @@ export const FixedAppBar = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={() => window.open(RestaurantInfo.takeoutLink, '_self')}>
+              <MenuItem
+                onClick={() => window.open(RestaurantInfo.takeoutLink, "_self")}
+              >
                 Order Food
               </MenuItem>
               <MenuItem>
-               <a style={{textDecoration: 'none'}} href="./mannings-food.pdf" download="RestaurantInfoFood">View Menu</a>
-
+                <a
+                  style={{ textDecoration: "none" }}
+                  href="./mannings-food.pdf"
+                  download="RestaurantInfoFood"
+                >
+                  View Menu
+                </a>
               </MenuItem>
             </Menu>
             <img

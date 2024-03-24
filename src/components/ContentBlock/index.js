@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { useTheme } from "@mui/material";
 import { RestaurantInfo } from "../../content/RestaurantInfo";
-import { ContactCard } from "../ContactCard/ContactCard";
-import ContentBlockItem from "../ContactBlockItem/ContentBlockItem";
-import { useLazyLoadImage } from "../../hooks/useLazyLoading";
+import { ContactCard } from "../ContactCard";
+import ContentBlockItem from "../ContentBlockItem";
+import { useLazyLoadImage } from "../../hooks/UseLazyLoading";
 
 const ContentBlock = ({ mobile }) => {
   const theme = useTheme();

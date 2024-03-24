@@ -1,17 +1,17 @@
-import {
-  GoogleMap,
-  useLoadScript,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useMemo } from "react";
-import "./App.css";
-import { RestaurantInfo } from "./content/RestaurantInfo";
+import "../../styles/App.css";
+import { RestaurantInfo } from "../../content/RestaurantInfo";
 
 const GoogleMaps = () => {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyCWJ6Xj4OVvTmKuUrOM3AbPX-KEO0J-Y5Y",
-    id: "a552e243fbe9d8ae",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+    id: process.env.REACT_APP_GOOGLE_MAPS_ID,
   });
-  const center = useMemo(() => ({ lat: RestaurantInfo.lat, lng: RestaurantInfo.long }), []);
+  const center = useMemo(
+    () => ({ lat: RestaurantInfo.lat, lng: RestaurantInfo.long }),
+    []
+  );
 
   return loadError ? (
     <></>
@@ -24,7 +24,7 @@ const GoogleMaps = () => {
           mapContainerClassName="map-container"
           center={center}
           zoom={20}
-          options={{ mapId: "a552e243fbe9d8ae" }}
+          options={{ mapId: process.env.REACT_APP_GOOGLE_MAPS_ID }}
         ></GoogleMap>
       )}
     </div>

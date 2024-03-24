@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { LocationCity, Phone, PunchClock } from "@mui/icons-material";
-import { StyledButton } from "../StyledButton/StyledButton";
+import { StyledButton } from "../StyledButton";
 import { Card, useTheme } from "@mui/material";
-import { ContactModal } from "../ContactModal/ContactModal";
+import { ContactModal } from "../ContactModal";
 
 export const ContactCard = ({ mobile }) => {
   const theme = useTheme();
@@ -72,7 +72,9 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: RestaurantInfo.hours }} />
+              <span
+                dangerouslySetInnerHTML={{ __html: RestaurantInfo.hours }}
+              />
             </div>
           </div>
           <div
@@ -98,7 +100,9 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: RestaurantInfo.address }} />
+              <span
+                dangerouslySetInnerHTML={{ __html: RestaurantInfo.address }}
+              />
             </div>
           </div>
           <div
@@ -124,7 +128,9 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span dangerouslySetInnerHTML={{ __html: RestaurantInfo.phone }} />
+              <span
+                dangerouslySetInnerHTML={{ __html: RestaurantInfo.phone }}
+              />
             </div>
           </div>
           <StyledButton
@@ -136,14 +142,14 @@ export const ContactCard = ({ mobile }) => {
             Reservations
           </StyledButton>
           <StyledButton
-                fullWidth
-                color="primary"
-                variant="outlined"
-                sx={"mt-1"}
-                onClick={() => setContactModalOpen(true)}
-              >
-                Message Us
-              </StyledButton>
+            fullWidth
+            color="primary"
+            variant="outlined"
+            sx={"mt-1"}
+            onClick={() => setContactModalOpen(true)}
+          >
+            Message Us
+          </StyledButton>
         </Card>
       </div>
     </Card>

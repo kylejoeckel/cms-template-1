@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Typography } from "@mui/material";
-import { DynamicButtons } from "../DynamicButtons/DynamicButtons"; // Make sure the path matches your project structure
-import { useLazyLoadImage } from "../../hooks/useLazyLoading"; // Custom hook for lazy loading
+import { DynamicButtons } from "../DynamicButtons"; // Make sure the path matches your project structure
+import { useLazyLoadImage } from "../../hooks/UseLazyLoading"; // Custom hook for lazy loading
 
 const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
   const loadedImage = useLazyLoadImage(content.contentImg);

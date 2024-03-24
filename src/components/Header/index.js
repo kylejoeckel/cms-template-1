@@ -1,5 +1,5 @@
 import { RestaurantInfo } from "../../content/RestaurantInfo";
-import { FixedAppBar } from "../FixedAppBar/FixedAppBar";
+import { FixedAppBar } from "../FixedAppBar";
 
 export const Header = () => {
   return (
