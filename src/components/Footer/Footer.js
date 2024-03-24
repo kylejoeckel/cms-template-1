@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { RestaurantInfo } from "../content/RestaurantInfo";
+import { RestaurantInfo } from "../../content/RestaurantInfo";
 
 export const Footer = () => {
   return (

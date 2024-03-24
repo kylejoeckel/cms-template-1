@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import GoogleMaps from "../GMaps";
+import GoogleMaps from "../../GMaps";
 import { Container, useTheme } from "@mui/material";
-import ContentBlock from "./ContentBlock";
+import ContentBlock from "../ContentBlock/ContentBlock";
 
 export const MainContainer = () => {
   const [mobile, setMobile] = useState(false);

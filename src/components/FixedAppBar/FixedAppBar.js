@@ -8,8 +8,8 @@ import {
   useScrollTrigger,
 } from "@mui/material";
 import React from "react";
-import { StyledButton } from "./StyledButton";
-import { RestaurantInfo } from "../content/RestaurantInfo";
+import { StyledButton } from "../StyledButton/StyledButton";
+import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { PhoneInTalk, Restaurant } from "@mui/icons-material";
 
 export const FixedAppBar = () => {

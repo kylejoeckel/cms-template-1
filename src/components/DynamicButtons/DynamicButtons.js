@@ -1,5 +1,5 @@
 import { ButtonGroup } from "@mui/material";
-import { StyledButton } from "./StyledButton";
+import { StyledButton } from "../StyledButton/StyledButton";
 
 export const DynamicButtons = ({ content, index }) => {
   return (

@@ -8,9 +8,9 @@ import {
   DialogContentText,
   CircularProgress,
 } from "@mui/material";
-import FeedbackSnackbar from './FeedbackSnackbar';
-import CustomTextField from './CustomTextField';
-import { RestaurantInfo } from "../content/RestaurantInfo";
+import FeedbackSnackbar from '../FeedbackSnackbar/FeedbackSnackbar';
+import CustomTextField from '../CustomTextField/CustomTextField';
+import { RestaurantInfo } from "../../content/RestaurantInfo";
 
 export const ContactModal = ({ open, setOpen }) => {
   const initialState = {

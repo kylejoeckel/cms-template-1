@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { RestaurantInfo } from "../content/RestaurantInfo";
+import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { LocationCity, Phone, PunchClock } from "@mui/icons-material";
-import { StyledButton } from "./StyledButton";
+import { StyledButton } from "../StyledButton/StyledButton";
 import { Card, useTheme } from "@mui/material";
-import { ContactModal } from "./ContactModal";
+import { ContactModal } from "../ContactModal/ContactModal";
 
 export const ContactCard = ({ mobile }) => {
   const theme = useTheme();

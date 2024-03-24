@@ -1,8 +1,8 @@
 import * as React from "react";
 import { CssBaseline } from "@mui/material";
-import { Footer } from "./components/Footer";
-import { MainContainer } from "./components/MainContainer";
-import { Header } from "./components/Header";
+import { Footer } from "./components/Footer/Footer";
+import { MainContainer } from "./components/MainContainer/MainContainer";
+import { Header } from "./components/Header/Header";
 import "./App.css";
 
 function App() {
