@@ -3,7 +3,7 @@ import { useTheme } from "@mui/material";
 import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { ContactCard } from "../ContactCard";
 import ContentBlockItem from "../ContentBlockItem";
-import { useLazyLoadImage } from "../../hooks/UseLazyLoading";
+import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
 
 const ContentBlock = ({ mobile }) => {
   const theme = useTheme();

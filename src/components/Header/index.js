@@ -1,31 +1,13 @@
-import { RestaurantInfo } from "../../content/RestaurantInfo";
-import { FixedAppBar } from "../FixedAppBar";
+import { VideoPlayer } from "../VideoPlayer";
+import "../../styles/index.css";
+import { useLocation } from "react-router-dom";
 
 export const Header = () => {
+  const location = useLocation();
+  const isHome = location.pathname === "/";
   return (
-    <header className="header">
-      <FixedAppBar />
-      <div
-        className="video-container"
-        style={{ borderBottom: "solid 34px white" }}
-      >
-        <video
-          className="videoTag"
-          poster={RestaurantInfo.heroVideoPoster}
-          autoPlay
-          loop
-          muted
-          playsInline
-          defaultMuted
-          width={"100vw"}
-        >
-          <source
-            style={{ width: "100vw" }}
-            src={RestaurantInfo.heroVideo}
-            type="video/mp4"
-          />
-        </video>
-      </div>
+    <header className="header" style={{ height: !isHome ? "200px" : "600px" }}>
+      <VideoPlayer />
     </header>
   );
 };

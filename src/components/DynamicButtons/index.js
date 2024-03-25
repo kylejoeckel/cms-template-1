@@ -1,42 +1,30 @@
 import { ButtonGroup } from "@mui/material";
 import { StyledButton } from "../StyledButton";
 
+// Function to detect if the user is on Safari and a mobile device
+const isSafariOnMobile = () => {
+  const userAgent = navigator.userAgent;
+  const isSafari = /^((?!chrome|android).)*safari/i.test(userAgent);
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(userAgent);
+  return isSafari && isMobile;
+};
+
 export const DynamicButtons = ({ content, index }) => {
+  // Check if the user is on Safari and on a mobile device
+  const safariMobile = isSafariOnMobile();
   return (
     <ButtonGroup>
-      {content.cta && (
+      {content.ctaList.map((cta) => (
         <StyledButton
           color={index % 2 === 0 ? "primary" : "info"}
-          href={content.ctaLink}
-          download={content.ctaDownload}
-          target="_blank"
+          href={`${cta?.ctaLink}${safariMobile ? ".pdf" : ""}`}
+          download={safariMobile ? true : cta?.ctaDownload}
+          target={safariMobile ? "_blank" : "_self"}
           rel="noopener noreferrer"
         >
-          {content.cta}
+          {cta?.cta}
         </StyledButton>
-      )}
-      {content.cta2 && (
-        <StyledButton
-          color={index % 2 === 0 ? "primary" : "info"}
-          href={content.cta2Link}
-          download={content.cta2Download}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {content.cta2}
-        </StyledButton>
-      )}
-      {content.cta3 && (
-        <StyledButton
-          color={index % 2 === 0 ? "primary" : "info"}
-          href={content.cta3Link}
-          download={content.cta3Download}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {content.cta3}
-        </StyledButton>
-      )}
+      ))}
     </ButtonGroup>
   );
 };

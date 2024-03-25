@@ -1,19 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Typography } from "@mui/material";
-import { DynamicButtons } from "../DynamicButtons"; // Make sure the path matches your project structure
-import { useLazyLoadImage } from "../../hooks/UseLazyLoading"; // Custom hook for lazy loading
+import { DynamicButtons } from "../DynamicButtons";
+import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
+import useFadeInOnScroll from "../../hooks/useFadeInOnScroll";
+import { StyledButton } from "../StyledButton";
+
+const MAX_CONTENT_LENGTH = 750;
 
 const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
+  const [ref, isVisible] = useFadeInOnScroll();
   const loadedImage = useLazyLoadImage(content.contentImg);
-  const placeholderImage = "/plate_of_food_silhouette.jpg"; // Placeholder image path
+  const placeholderImage = "/plate_of_food_silhouette.jpg";
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpandContent = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const truncateContent = (content, maxLength) => {
+    if (content.length <= maxLength) return content;
+    return content.substring(0, maxLength) + "...";
+  };
+
+  const contentDisplay =
+    content.content.length > MAX_CONTENT_LENGTH && !isExpanded
+      ? truncateContent(content.content, MAX_CONTENT_LENGTH)
+      : content.content;
 
   return (
     <div
+      ref={ref}
       style={{
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
         width: "100%",
+        opacity: isVisible ? 1 : 0,
+        transition: "opacity 0.5s ease-out",
       }}
     >
       <div
@@ -34,11 +57,9 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           color: "transparent",
-          padding: mobile ? "10% 20% 50% 20%" : "",
+          padding: mobile ? "20px 30px 350px" : "",
         }}
-        dangerouslySetInnerHTML={{
-          __html: mobile ? content.content : "",
-        }}
+        dangerouslySetInnerHTML={{ __html: mobile ? contentDisplay : "" }}
       />
       <Card
         elevation={0}
@@ -79,9 +100,17 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
         </div>
         <hr />
         <Typography
-          dangerouslySetInnerHTML={{ __html: content.content }}
+          dangerouslySetInnerHTML={{ __html: contentDisplay }}
           variant="body1"
         />
+        {content.content.length > MAX_CONTENT_LENGTH && (
+          <StyledButton
+            color={index % 2 === 0 ? "primary" : "info"}
+            onClick={toggleExpandContent}
+          >
+            {isExpanded ? "Read Less" : "Read More"}
+          </StyledButton>
+        )}
         <div
           style={{
             display: "flex",
@@ -89,10 +118,10 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
             justifyContent: index % 2 === 0 ? "flex-start" : "flex-end",
           }}
         >
-          {content.cta ? (
+          {content.ctaList ? (
             <DynamicButtons content={content} index={index} />
           ) : (
-            <div style={{ height: "50px" }} />
+            <></>
           )}
         </div>
       </Card>
