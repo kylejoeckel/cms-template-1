@@ -5,9 +5,11 @@ import {
   RestaurantMenuTwoTone,
   WineBarTwoTone,
 } from "@mui/icons-material";
-import video from "../img/ManningsVideo.mp4";
 
 export const RestaurantInfo = {
+  groupName: "mannings-c4a408fb-7053-4571-8245-55e13626ff63",
+  s3url:
+    "https://asset-manager-server-bucket.s3.amazonaws.com/mannings-c4a408fb-7053-4571-8245-55e13626ff63/",
   fullName: "Manning's Steaks & Spirits",
   hours: "Tuesday - Sunday. 11am - 9:30pm<br/>Closed Monday",
   address: "11100 W Alameda Ave<br />Lakewood, Colorado 80226",
@@ -21,11 +23,11 @@ export const RestaurantInfo = {
   takeoutLink:
     "https://order.toasttab.com/online/mannings-steaks-and-spirits#!/",
   noveltyLink: "https://www.toasttab.com/mannings-steaks-and-spirits/giftcards",
-  mainLogo: require("../img/Mannings_Logo_Manning's Dark_edited_edited.png"),
-  navLogo: require("../img/Mannings_Logo_One Color White.png"),
-  heroImg: require("../img/Food12.png"),
-  heroVideo: video,
-  heroVideoPoster: require("../img/Sign1.jpg"),
+  mainLogo: "Mannings_Logo_Manning's Dark_edited_edited.png",
+  navLogo: "Mannings_Logo_One Color White.png",
+  heroImg: "Food12.png",
+  heroVideo: "ManningsVideo.mp4",
+  heroVideoPoster: "Sign1.jpg",
   content: [
     {
       title: "Manning's Steaks & Spirits",
@@ -47,14 +49,14 @@ export const RestaurantInfo = {
     </a>  
     for updates and irresistible glimpses into the world of
     Manning's Steaks and Spirits. Bon appétit!`,
-      contentImg: require("../img/Menu2.jpg"),
+      contentImg: "Menu2.jpg",
       ctaList: [{ cta: "menu", ctaLink: "/mannings-food", ctaDownload: false }],
     },
     {
       title: "The Bar",
       titleIcon: <WineBarTwoTone />,
       content: `Manning's Steaks and Spirits sets an unparalleled standard with its top-notch bar program, elevating the art of mixology and beverage selection to remarkable heights. Renowned for its hand-crafted cocktails that blend innovation with timeless classics, the bar program is a true testament to the dedication of skilled mixologists who craft each drink with meticulous attention to detail. Moreover, Manning's boasts an exquisite collection of the finest wines, whiskeys, and tequilas, curated to cater to the most discerning palates. With an exceptional array of choices, patrons are invited to indulge in a sensory journey that celebrates the epitome of taste and refinement.`,
-      contentImg: require("../img/Bar5.jpg"),
+      contentImg: "Bar5.jpg",
       ctaList: [
         {
           cta: "cocktails",
@@ -77,7 +79,7 @@ export const RestaurantInfo = {
       title: "Happy Hour",
       titleIcon: <CelebrationTwoTone />,
       content: `Manning's Steaks and Spirits invites you to our unbeatable Happy Hour from 2 PM to 5 PM daily. Enjoy $3.50 Coors Banquet and Outlaw Light Lager, $4 House Spirits with a mixer of your choice, and $5 specials on wines, craft beer, and cocktails like the House Manhattan and Moscow Mule. Pair your drinks with $7 appetizers, including Crab Cakes and loaded Potato Skins. Join us and make your evenings happier!`,
-      contentImg: require("../img/Cocktail21.jpg"),
+      contentImg: "Cocktail21.jpg",
       ctaList: [
         { cta: "happy hour", ctaLink: "/mannings-drink", ctaDownload: false },
       ],
@@ -89,7 +91,7 @@ export const RestaurantInfo = {
       our convenient takeout ordering service. Indulge in the same
       exceptional flavors and quality you love, now available for
       pickup. Click the link below to start your order or give us a call at 720.484.6567 and we can place the order for you. Elevate your evening at home with Manning's take out`,
-      contentImg: require("../img/Food23.jpg"),
+      contentImg: "Food23.jpg",
       ctaList: [
         {
           cta: "Order Now",
@@ -103,7 +105,7 @@ export const RestaurantInfo = {
       title: "Manning's Gift Cards",
       titleIcon: <CardGiftcardTwoTone />,
       content: `Express your appreciation for exceptional dining experiences by sending the gift of Manning's Steaks and Spirits through our E-Gift Cards. Whether it's for a special occasion, a gesture of gratitude, or simply to share the joy of indulgence, our E-Gift Cards are a wonderful way to spread the love of remarkable cuisine and hand-crafted cocktails. Let your friends, family, or colleagues discover the delight of Manning's and create cherished memories. Share the love today by sending an E-Gift Card their way.`,
-      contentImg: require("../img/Food27.jpg"),
+      contentImg: "Food27.jpg",
       ctaList: [
         {
           cta: "Order E-Gift Card",
@@ -146,7 +148,7 @@ export const RestaurantInfo = {
       the restaurant and having conversations with patrons. His larger-than-life personality
       makes him a hospitality natural, and he truly loves being a part of the Lakewood
       restaurant community.`,
-      contentImg: require("../img/Decor2.jpg"),
+      contentImg: "Decor2.jpg",
       ctaList: [],
     },
   ],

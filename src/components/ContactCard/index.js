@@ -33,7 +33,7 @@ export const ContactCard = ({ mobile }) => {
       >
         <img
           style={{ width: "80%", margin: "0 auto 24px" }}
-          src={RestaurantInfo.mainLogo}
+          src={`${RestaurantInfo.s3url}${RestaurantInfo.mainLogo}`}
           alt="RestaurantInfo Logo"
         />
         <Card

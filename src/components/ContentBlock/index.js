@@ -17,7 +17,9 @@ const ContentBlock = ({ mobile }) => {
       contentRefs.current[url] = el;
     }
   };
-  const loadHeroImage = useLazyLoadImage(RestaurantInfo.heroImg);
+  const loadHeroImage = useLazyLoadImage(
+    RestaurantInfo.s3url + RestaurantInfo.heroImg
+  );
   return (
     <>
       <div
@@ -31,14 +33,16 @@ const ContentBlock = ({ mobile }) => {
           <ContactCard mobile />
         </div>
         <div
-          ref={(el) => registerRef(RestaurantInfo.heroImg, el)}
-          data-bg={RestaurantInfo.heroImg}
+          ref={(el) =>
+            registerRef(RestaurantInfo.s3url + RestaurantInfo.heroImg, el)
+          }
+          data-bg={RestaurantInfo.s3url + RestaurantInfo.heroImg}
           style={{
             minHeight: "200px",
             width: mobile ? "100%" : "calc(60%)",
             backgroundImage: `${
               loadHeroImage
-                ? `url(${RestaurantInfo.heroImg})`
+                ? `url(${RestaurantInfo.s3url + RestaurantInfo.heroImg})`
                 : `url(${placeholderImage})`
             }`, // Load hero image based on state
             backgroundPosition: "center",

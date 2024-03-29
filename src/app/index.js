@@ -12,6 +12,7 @@ import { Header } from "../components/Header";
 import PDFViewer from "../components/PDFViewer";
 import "../styles/App.css";
 import { FixedAppBar } from "../components/FixedAppBar";
+import { RestaurantInfo } from "../content/RestaurantInfo";
 
 function App() {
   return (
@@ -54,7 +55,7 @@ const PDFViewerWrapper = () => {
   // construct the file URL here. You might need to adjust based on your actual file location.
   // For example, if your PDFs are stored in the public folder under pdfs/,
   // and the fileName does not include the .pdf extension, it should be added.
-  const fileUrl = require(`../img/${fileName}.pdf`);
+  const fileUrl = `${RestaurantInfo.s3url}${fileName}.pdf`;
 
   return <PDFViewer file={fileUrl} />;
 };

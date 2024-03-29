@@ -4,6 +4,7 @@ import { DynamicButtons } from "../DynamicButtons";
 import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
 import useFadeInOnScroll from "../../hooks/useFadeInOnScroll";
 import { StyledButton } from "../StyledButton";
+import { RestaurantInfo } from "../../content/RestaurantInfo";
 
 const MAX_CONTENT_LENGTH = 750;
 
@@ -50,7 +51,7 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
           width: mobile ? "100%" : "45%",
           backgroundImage: `${
             loadedImage
-              ? `url(${content.contentImg})`
+              ? `url(${RestaurantInfo.s3url + content.contentImg})`
               : `url(${placeholderImage})`
           }`,
           backgroundRepeat: "no-repeat",

@@ -99,7 +99,7 @@ export const FixedAppBar = () => {
                 maxHeight: mobile ? "80px" : "100px",
                 cursor: "pointer",
               }}
-              src={RestaurantInfo.navLogo}
+              src={`${RestaurantInfo.s3url}${RestaurantInfo.navLogo}`}
               onClick={() => window.open("/", "_self")}
               alt="Manning's Steaks and Spirits Logo"
             />

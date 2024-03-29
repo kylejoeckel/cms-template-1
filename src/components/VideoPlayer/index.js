@@ -14,7 +14,7 @@ export const VideoPlayer = () => {
     >
       <video
         className="videoTag"
-        poster={RestaurantInfo.heroVideoPoster}
+        poster={`${RestaurantInfo.s3url}${RestaurantInfo.heroVideoPoster}`}
         autoPlay
         loop
         muted
@@ -24,7 +24,7 @@ export const VideoPlayer = () => {
       >
         <source
           style={{ width: "100%" }}
-          src={RestaurantInfo.heroVideo}
+          src={`${RestaurantInfo.s3url}${RestaurantInfo.heroVideo}`}
           type="video/mp4"
         />
       </video>
