@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { LocationCity, Phone, PunchClock } from "@mui/icons-material";
 import { StyledButton } from "../StyledButton";
 import { Card, useTheme } from "@mui/material";
 import { ContactModal } from "../ContactModal";
 
-export const ContactCard = ({ mobile }) => {
+export const ContactCard = ({ mobile, data }) => {
   const theme = useTheme();
   const [contactModalOpen, setContactModalOpen] = useState(false);
+  const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
 
   return (
     <Card
@@ -21,7 +21,11 @@ export const ContactCard = ({ mobile }) => {
         padding: mobile ? "0 !important" : "12px 12px !important",
       }}
     >
-      <ContactModal open={contactModalOpen} setOpen={setContactModalOpen} />
+      <ContactModal
+        open={contactModalOpen}
+        setOpen={setContactModalOpen}
+        data={data}
+      />
       <div
         style={{
           display: "flex",
@@ -33,8 +37,8 @@ export const ContactCard = ({ mobile }) => {
       >
         <img
           style={{ width: "80%", margin: "0 auto 24px" }}
-          src={`${RestaurantInfo.s3url}${RestaurantInfo.mainLogo}`}
-          alt="RestaurantInfo Logo"
+          src={`${ASSET_URL}${data?.mainLogo}`}
+          alt="data Logo"
         />
         <Card
           elevation={0}
@@ -72,9 +76,7 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span
-                dangerouslySetInnerHTML={{ __html: RestaurantInfo.hours }}
-              />
+              <span dangerouslySetInnerHTML={{ __html: data?.hours }} />
             </div>
           </div>
           <div
@@ -100,9 +102,7 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span
-                dangerouslySetInnerHTML={{ __html: RestaurantInfo.address }}
-              />
+              <span dangerouslySetInnerHTML={{ __html: data?.address }} />
             </div>
           </div>
           <div
@@ -128,16 +128,14 @@ export const ContactCard = ({ mobile }) => {
                 padding: 8,
               }}
             >
-              <span
-                dangerouslySetInnerHTML={{ __html: RestaurantInfo.phone }}
-              />
+              <span dangerouslySetInnerHTML={{ __html: data?.phone }} />
             </div>
           </div>
           <StyledButton
             fullWidth
             color="primary"
             variant="outlined"
-            href={RestaurantInfo.reservationLink}
+            href={data?.reservationLink}
           >
             Reservations
           </StyledButton>

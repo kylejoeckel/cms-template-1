@@ -1,25 +1,21 @@
 import React, { useRef } from "react";
 import { useTheme } from "@mui/material";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { ContactCard } from "../ContactCard";
 import ContentBlockItem from "../ContentBlockItem";
-import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
 
-const ContentBlock = ({ mobile }) => {
+const ContentBlock = ({ data, mobile }) => {
+  const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   const theme = useTheme();
   const contentRefs = useRef({});
-
-  // Initial path to the placeholder image
-  const placeholderImage = "/plate_of_food_silhouette.jpg"; // Adjust the path as needed based on your project structure
 
   const registerRef = (url, el) => {
     if (el && !contentRefs.current[url]) {
       contentRefs.current[url] = el;
     }
   };
-  const loadHeroImage = useLazyLoadImage(
-    RestaurantInfo.s3url + RestaurantInfo.heroImg
-  );
+
+  const imageUrl = `${ASSET_URL}${data?.heroImg}`;
+
   return (
     <>
       <div
@@ -30,30 +26,26 @@ const ContentBlock = ({ mobile }) => {
         }}
       >
         <div style={{ width: mobile ? "100%" : "calc(40%)" }}>
-          <ContactCard mobile />
+          <ContactCard mobile data={data} />
         </div>
         <div
-          ref={(el) =>
-            registerRef(RestaurantInfo.s3url + RestaurantInfo.heroImg, el)
-          }
-          data-bg={RestaurantInfo.s3url + RestaurantInfo.heroImg}
+          ref={(el) => registerRef(imageUrl, el)}
+          data-bg={imageUrl}
           style={{
             minHeight: "200px",
             width: mobile ? "100%" : "calc(60%)",
-            backgroundImage: `${
-              loadHeroImage
-                ? `url(${RestaurantInfo.s3url + RestaurantInfo.heroImg})`
-                : `url(${placeholderImage})`
-            }`, // Load hero image based on state
+            backgroundImage: `url(${imageUrl})`, // Eager loading the hero image
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
         ></div>
       </div>
       {mobile && <hr />}
-      {RestaurantInfo.content.map((content, i) => (
+      {data?.content?.map((content, i) => (
         <ContentBlockItem
           content={content}
+          data={data}
+          key={i}
           index={i}
           mobile={mobile}
           theme={theme}

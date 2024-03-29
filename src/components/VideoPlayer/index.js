@@ -1,7 +1,6 @@
 import { useLocation } from "react-router-dom";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
 
-export const VideoPlayer = () => {
+export const VideoPlayer = ({ data }) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
   return (
@@ -14,7 +13,7 @@ export const VideoPlayer = () => {
     >
       <video
         className="videoTag"
-        poster={`${RestaurantInfo.s3url}${RestaurantInfo.heroVideoPoster}`}
+        poster={`${data?.assetUrl}${data?.groupName}${data?.heroVideoPoster}`}
         autoPlay
         loop
         muted
@@ -24,7 +23,7 @@ export const VideoPlayer = () => {
       >
         <source
           style={{ width: "100%" }}
-          src={`${RestaurantInfo.s3url}${RestaurantInfo.heroVideo}`}
+          src={`/HeroVideo.mp4`}
           type="video/mp4"
         />
       </video>

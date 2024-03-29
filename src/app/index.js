@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,56 +7,56 @@ import {
 } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { Footer } from "../components/Footer";
-import { MainContainer } from "../components/MainContainer";
+// import { MainContainer } from "../components/MainContainer";
 import { Header } from "../components/Header";
 import PDFViewer from "../components/PDFViewer";
 import "../styles/App.css";
 import { FixedAppBar } from "../components/FixedAppBar";
-import { RestaurantInfo } from "../content/RestaurantInfo";
+import LoadingScreen from "../components/LoadingScreen";
+import useSiteData from "../hooks/useSiteData";
+
+const MainContainer = React.lazy(() => import("../components/MainContainer"));
 
 function App() {
+  const { siteData } = useSiteData();
   return (
     <Router>
-      <div className="app">
-        <CssBaseline />
-        <FixedAppBar />
+      <Suspense fallback={<LoadingScreen data={siteData} />}>
+        <div className="app">
+          <CssBaseline />
+          <FixedAppBar data={siteData} />
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Header />
-                <MainContainer />
-              </>
-            }
-          />
-          <Route
-            path="/:fileName"
-            element={
-              <>
-                <PDFViewerWrapper />
-              </>
-            }
-          />
-        </Routes>
-        <Footer />
-      </div>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Header data={siteData} />
+                  <MainContainer data={siteData} />
+                </>
+              }
+            />
+            <Route
+              path="/:fileName"
+              element={
+                <>
+                  <PDFViewerWrapper data={siteData} />
+                </>
+              }
+            />
+          </Routes>
+          <Footer />
+        </div>
+      </Suspense>
     </Router>
   );
 }
 
 // Wrapper component to handle fetching the PDF file based on the route parameter
-const PDFViewerWrapper = () => {
-  // Use useParams hook from react-router-dom to access the fileName parameter
+const PDFViewerWrapper = ({ data }) => {
+  const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   let { fileName } = useParams();
-
-  // Assuming your PDF files are stored in a public accessible directory,
-  // construct the file URL here. You might need to adjust based on your actual file location.
-  // For example, if your PDFs are stored in the public folder under pdfs/,
-  // and the fileName does not include the .pdf extension, it should be added.
-  const fileUrl = `${RestaurantInfo.s3url}${fileName}.pdf`;
-
+  const fileUrl = `${ASSET_URL}/${fileName}.pdf`;
   return <PDFViewer file={fileUrl} />;
 };
 

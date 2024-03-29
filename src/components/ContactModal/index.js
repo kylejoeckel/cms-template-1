@@ -9,10 +9,9 @@ import {
   CircularProgress,
 } from "@mui/material";
 import CustomTextField from "../CustomTextField";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { useSnackbar } from "../../hooks/useSnackbar"; // Make sure to adjust the import path to your custom hook
 
-export const ContactModal = ({ open, setOpen }) => {
+export const ContactModal = ({ open, setOpen, data }) => {
   const initialState = {
     name: "",
     email: "",
@@ -63,17 +62,17 @@ export const ContactModal = ({ open, setOpen }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from_address: `Website Message <mail@${RestaurantInfo.domainName}>`,
-            to_address: RestaurantInfo.contactEmail,
+            from_address: `Website Message <mail@${data?.domainName}>`,
+            to_address: data?.contactEmail,
             subject: `${formValues.name} - ${formValues.email}`,
             body: formValues.message,
           }),
         }
       );
 
-      const data = await response.json();
+      const resData = await response.json();
       if (!response.ok)
-        throw new Error(data.message || "Failed to send email.");
+        throw new Error(resData.message || "Failed to send email.");
       enqueueSnackbar("Message sent successfully!", "success"); // Using the hook to enqueue the snackbar
       handleClose();
     } catch (error) {

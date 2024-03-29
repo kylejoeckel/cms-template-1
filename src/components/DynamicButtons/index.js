@@ -14,8 +14,9 @@ export const DynamicButtons = ({ content, index }) => {
   const safariMobile = isSafariOnMobile();
   return (
     <ButtonGroup>
-      {content.ctaList.map((cta) => (
+      {content.ctaList.map((cta, idx) => (
         <StyledButton
+          key={idx}
           color={index % 2 === 0 ? "primary" : "info"}
           href={`${cta?.ctaLink}${safariMobile ? ".pdf" : ""}`}
           download={safariMobile ? true : cta?.ctaDownload}

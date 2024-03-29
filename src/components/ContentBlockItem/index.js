@@ -1,17 +1,23 @@
 import React, { useState } from "react";
 import { Card, Typography } from "@mui/material";
 import { DynamicButtons } from "../DynamicButtons";
-import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
 import useFadeInOnScroll from "../../hooks/useFadeInOnScroll";
 import { StyledButton } from "../StyledButton";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
+import DynamicIcon from "../DynamicIcon";
 
 const MAX_CONTENT_LENGTH = 750;
 
-const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
+const ContentBlockItem = ({
+  content,
+  index,
+  mobile,
+  theme,
+  registerRef,
+  data,
+}) => {
   const [ref, isVisible] = useFadeInOnScroll();
-  const loadedImage = useLazyLoadImage(content.contentImg);
-  const placeholderImage = "/plate_of_food_silhouette.jpg";
+  const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
+  const imageUrl = `${ASSET_URL}${content.contentImg}`;
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpandContent = () => {
@@ -41,19 +47,14 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
       }}
     >
       <div
-        ref={(el) => registerRef(content.contentImg, el)}
-        data-bg={content.contentImg}
+        ref={(el) => registerRef && registerRef(imageUrl, el)}
         style={{
           order: mobile ? 0 : index % 2 === 0 ? 0 : 2,
           minHeight: "200px",
           height: "auto",
           position: "relative",
           width: mobile ? "100%" : "45%",
-          backgroundImage: `${
-            loadedImage
-              ? `url(${RestaurantInfo.s3url + content.contentImg})`
-              : `url(${placeholderImage})`
-          }`,
+          backgroundImage: `url(${imageUrl})`, // Directly set the image URL
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -97,7 +98,7 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
             dangerouslySetInnerHTML={{ __html: content.title }}
             variant="h5"
           />
-          {content.titleIcon && <>&nbsp;{content.titleIcon}&nbsp;</>}
+          <DynamicIcon iconName={content.titleIcon} />
         </div>
         <hr />
         <Typography
@@ -121,9 +122,7 @@ const ContentBlockItem = ({ content, index, mobile, theme, registerRef }) => {
         >
           {content.ctaList ? (
             <DynamicButtons content={content} index={index} />
-          ) : (
-            <></>
-          )}
+          ) : null}
         </div>
       </Card>
     </div>

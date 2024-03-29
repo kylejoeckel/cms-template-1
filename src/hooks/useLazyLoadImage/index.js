@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 // Custom hook for lazy loading images
 export function useLazyLoadImage(imageUrl) {
   const [loaded, setLoaded] = useState(false);
+  const placeholderImage = "/plate_of_food_silhouette.jpg";
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,5 +30,5 @@ export function useLazyLoadImage(imageUrl) {
     };
   }, [imageUrl]);
 
-  return loaded;
+  return { placeholderImage, imageLoaded: loaded };
 }

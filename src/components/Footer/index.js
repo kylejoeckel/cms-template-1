@@ -1,12 +1,10 @@
 import { Typography } from "@mui/material";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
 
-export const Footer = () => {
+export const Footer = ({ data }) => {
   return (
     <footer className="footer">
       <Typography variant="body2">
-        &copy; {new Date().getFullYear()} {RestaurantInfo.fullName}. All rights
-        reserved.
+        &copy; {new Date().getFullYear()} {data?.fullName}. All rights reserved.
       </Typography>
     </footer>
   );

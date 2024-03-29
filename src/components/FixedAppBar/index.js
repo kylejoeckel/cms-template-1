@@ -8,7 +8,6 @@ import {
   useScrollTrigger,
 } from "@mui/material";
 import { StyledButton } from "../StyledButton";
-import { RestaurantInfo } from "../../content/RestaurantInfo";
 import { PhoneInTalk, Restaurant } from "@mui/icons-material";
 import { useMobileView } from "../../hooks/useMobileView";
 
@@ -30,7 +29,8 @@ function ElevationScroll({ children }) {
   });
 }
 
-export const FixedAppBar = () => {
+export const FixedAppBar = ({ data }) => {
+  const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const mobile = useMobileView("md"); // Using the custom hook
@@ -76,9 +76,7 @@ export const FixedAppBar = () => {
                 MenuListProps={{ "aria-labelledby": "basic-button" }}
               >
                 <MenuItem
-                  onClick={() =>
-                    window.open(RestaurantInfo.takeoutLink, "_self")
-                  }
+                  onClick={() => window.open(data?.takeoutLink, "_self")}
                 >
                   Order Food
                 </MenuItem>
@@ -86,7 +84,7 @@ export const FixedAppBar = () => {
                   <a
                     style={{ textDecoration: "none" }}
                     href="./mannings-food.pdf"
-                    download="RestaurantInfoFood"
+                    download="dataFood"
                   >
                     View Menu
                   </a>
@@ -99,7 +97,7 @@ export const FixedAppBar = () => {
                 maxHeight: mobile ? "80px" : "100px",
                 cursor: "pointer",
               }}
-              src={`${RestaurantInfo.s3url}${RestaurantInfo.navLogo}`}
+              src={`${ASSET_URL}${data?.navLogo}`}
               onClick={() => window.open("/", "_self")}
               alt="Manning's Steaks and Spirits Logo"
             />
@@ -107,7 +105,7 @@ export const FixedAppBar = () => {
               <StyledButton
                 color="secondary"
                 variant="text"
-                href={`tel:${RestaurantInfo.phone}`}
+                href={`tel:${data?.phone}`}
               >
                 <PhoneInTalk style={{ marginRight: mobile ? "0" : "4px" }} />
                 {!mobile && `Contact us`}
