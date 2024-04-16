@@ -6,6 +6,7 @@ import { FixedAppBar } from "../components/FixedAppBar";
 import LoadingScreen from "../components/LoadingScreen";
 import useSiteData from "../hooks/useSiteData";
 import "../styles/App.css";
+import MetaTags from "../components/MetaTags";
 
 // Create a Context for site data
 export const SiteDataContext = createContext(null);
@@ -17,6 +18,7 @@ function App() {
   return (
     <Router>
       <SiteDataContext.Provider value={siteData}>
+        <MetaTags />
         <Suspense fallback={<LoadingScreen />}>
           <div className="app">
             <CssBaseline />

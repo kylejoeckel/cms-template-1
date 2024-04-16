@@ -27,7 +27,7 @@ export const VideoPlayer = () => {
       >
         <source
           style={{ width: "100%" }}
-          src={`/HeroVideo.mp4`}
+          src={`${data?.assetUrl}${data?.groupName}${data?.heroVideo}`}
           type="video/mp4"
         />
       </video>
