@@ -52,14 +52,16 @@ export const ContactCard = ({ mobile }) => {
           <ContactInfoItem Icon={PunchClock} content={data?.hours} />
           <ContactInfoItem Icon={LocationCity} content={data?.address} />
           <ContactInfoItem Icon={Phone} content={data?.phone} />
-          <StyledButton
-            fullWidth
-            color="primary"
-            variant="outlined"
-            href={data?.reservationLink}
-          >
-            Reservations
-          </StyledButton>
+          {data?.reservationLink && (
+            <StyledButton
+              fullWidth
+              color="primary"
+              variant="outlined"
+              href={data?.reservationLink}
+            >
+              Reservations
+            </StyledButton>
+          )}
           <StyledButton
             fullWidth
             color="primary"
