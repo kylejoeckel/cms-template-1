@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { LocationCity, Phone, PunchClock } from "@mui/icons-material";
+import { Card, useTheme, Box } from "@mui/material";
 import { StyledButton } from "../StyledButton";
-import { Card, useTheme } from "@mui/material";
 import { ContactModal } from "../ContactModal";
+import { SiteDataContext } from "../../app";
+import "./ContactCard.css"; // Assuming you move styles here
 
-export const ContactCard = ({ mobile, data }) => {
+const ContactInfoItem = ({ Icon, content }) => (
+  <Box display="flex" alignItems="center" p={1}>
+    <Box p={1}>
+      <Icon />
+    </Box>
+    <Box p={1} dangerouslySetInnerHTML={{ __html: content }} />
+  </Box>
+);
+
+export const ContactCard = ({ mobile }) => {
   const theme = useTheme();
+  const data = useContext(SiteDataContext);
   const [contactModalOpen, setContactModalOpen] = useState(false);
   const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
 
@@ -16,121 +28,30 @@ export const ContactCard = ({ mobile, data }) => {
       sx={{
         textAlign: "left",
         width: mobile ? "100%" : "calc(40%)",
-        backgroundColor: theme.palette.background.default,
+        backgroundColor: theme?.palette?.background?.default,
         borderRadius: 0,
-        padding: mobile ? "0 !important" : "12px 12px !important",
+        padding: mobile ? 0 : 2,
       }}
     >
-      <ContactModal
-        open={contactModalOpen}
-        setOpen={setContactModalOpen}
-        data={data}
-      />
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          width: "100%",
-          paddingBottom: "18px",
-        }}
+      <ContactModal open={contactModalOpen} setOpen={setContactModalOpen} />
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-between"
+        width="100%"
+        pb={2}
       >
-        <img
-          style={{ width: "80%", margin: "0 auto 24px" }}
-          src={`${ASSET_URL}${data?.mainLogo}`}
-          alt="data Logo"
-        />
-        <Card
-          elevation={0}
-          style={{
-            padding: "14px 22px",
-            border: "solid",
-            display: "flex",
-            flexDirection: "column",
-            width: "90%",
-            margin: "0 auto",
-            lineHeight: "26px",
-            backgroundColor: theme.palette.background.default,
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 8,
-              }}
-            >
-              <PunchClock />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 8,
-              }}
-            >
-              <span dangerouslySetInnerHTML={{ __html: data?.hours }} />
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 8,
-              }}
-            >
-              <LocationCity />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 8,
-              }}
-            >
-              <span dangerouslySetInnerHTML={{ __html: data?.address }} />
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 8,
-              }}
-            >
-              <Phone />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                padding: 8,
-              }}
-            >
-              <span dangerouslySetInnerHTML={{ __html: data?.phone }} />
-            </div>
-          </div>
+        {data?.mainLogo && (
+          <img
+            className="contactCardLogo"
+            src={`${ASSET_URL}${data?.mainLogo}`}
+            alt="data Logo"
+          />
+        )}
+        <Card elevation={0} className="contactInfoCard">
+          <ContactInfoItem Icon={PunchClock} content={data?.hours} />
+          <ContactInfoItem Icon={LocationCity} content={data?.address} />
+          <ContactInfoItem Icon={Phone} content={data?.phone} />
           <StyledButton
             fullWidth
             color="primary"
@@ -143,13 +64,13 @@ export const ContactCard = ({ mobile, data }) => {
             fullWidth
             color="primary"
             variant="outlined"
-            sx={"mt-1"}
+            sx={{ mt: 1 }}
             onClick={() => setContactModalOpen(true)}
           >
             Message Us
           </StyledButton>
         </Card>
-      </div>
+      </Box>
     </Card>
   );
 };

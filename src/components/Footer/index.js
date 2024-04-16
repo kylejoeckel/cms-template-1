@@ -1,6 +1,10 @@
 import { Typography } from "@mui/material";
+import { useContext } from "react";
+import { SiteDataContext } from "../../app";
 
-export const Footer = ({ data }) => {
+export const Footer = () => {
+  const data = useContext(SiteDataContext);
+
   return (
     <footer className="footer">
       <Typography variant="body2">

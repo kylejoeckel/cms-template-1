@@ -1,9 +1,13 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { useTheme } from "@mui/material";
 import { ContactCard } from "../ContactCard";
 import ContentBlockItem from "../ContentBlockItem";
+import { SiteDataContext } from "../../app";
+import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
 
-const ContentBlock = ({ data, mobile }) => {
+const ContentBlock = ({ mobile }) => {
+  const data = useContext(SiteDataContext);
+
   const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   const theme = useTheme();
   const contentRefs = useRef({});
@@ -15,6 +19,8 @@ const ContentBlock = ({ data, mobile }) => {
   };
 
   const imageUrl = `${ASSET_URL}${data?.heroImg}`;
+  const { placeholderImage, imageLoaded } = useLazyLoadImage(imageUrl);
+
 
   return (
     <>
@@ -26,7 +32,7 @@ const ContentBlock = ({ data, mobile }) => {
         }}
       >
         <div style={{ width: mobile ? "100%" : "calc(40%)" }}>
-          <ContactCard mobile data={data} />
+          <ContactCard mobile />
         </div>
         <div
           ref={(el) => registerRef(imageUrl, el)}
@@ -34,7 +40,7 @@ const ContentBlock = ({ data, mobile }) => {
           style={{
             minHeight: "200px",
             width: mobile ? "100%" : "calc(60%)",
-            backgroundImage: `url(${imageUrl})`, // Eager loading the hero image
+            backgroundImage: `url(${imageLoaded ? imageUrl : placeholderImage})`, 
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -44,7 +50,6 @@ const ContentBlock = ({ data, mobile }) => {
       {data?.content?.map((content, i) => (
         <ContentBlockItem
           content={content}
-          data={data}
           key={i}
           index={i}
           mobile={mobile}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   AppBar,
   Box,
@@ -10,6 +10,7 @@ import {
 import { StyledButton } from "../StyledButton";
 import { PhoneInTalk, Restaurant } from "@mui/icons-material";
 import { useMobileView } from "../../hooks/useMobileView";
+import { SiteDataContext } from "../../app";
 
 function ElevationScroll({ children }) {
   const trigger = useScrollTrigger({
@@ -29,7 +30,8 @@ function ElevationScroll({ children }) {
   });
 }
 
-export const FixedAppBar = ({ data }) => {
+export const FixedAppBar = () => {
+  const data = useContext(SiteDataContext);
   const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -43,7 +45,7 @@ export const FixedAppBar = ({ data }) => {
     setAnchorEl(null);
   };
 
-  return (
+  return data && (
     <Box sx={{ flexGrow: 1 }}>
       <ElevationScroll>
         <AppBar elevation={0} position="fixed">
@@ -65,50 +67,50 @@ export const FixedAppBar = ({ data }) => {
                 onClick={handleClick}
               >
                 <Restaurant style={{ marginRight: mobile ? "0" : "4px" }} />
-                {mobile ? "" : "Order Now!"}
+                {mobile ? "" : data?.header?.ctaList[0].cta}
               </StyledButton>
               <Menu
                 id="basic-menu"
-                sx={{ marginTop: "54px", marginLeft: "12px" }}
+                sx={{ marginTop: "36px", marginLeft: "12px" }}
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
                 MenuListProps={{ "aria-labelledby": "basic-button" }}
               >
-                <MenuItem
-                  onClick={() => window.open(data?.takeoutLink, "_self")}
-                >
-                  Order Food
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    style={{ textDecoration: "none" }}
-                    href="./mannings-food.pdf"
-                    download="dataFood"
-                  >
-                    View Menu
-                  </a>
-                </MenuItem>
+                {data?.header?.ctaList[0].ctaMenuOpts.map((opt, i) => (
+                  <MenuItem>
+                    <a
+                      key={i}
+                      style={{ textDecoration: "none" }}
+                      href={opt.link}
+                      target="_self"
+                    >
+                      {opt.title}
+                    </a>
+                  </MenuItem>
+                ))}
               </Menu>
             </div>
 
-            <img
-              style={{
-                maxHeight: mobile ? "80px" : "100px",
-                cursor: "pointer",
-              }}
-              src={`${ASSET_URL}${data?.navLogo}`}
-              onClick={() => window.open("/", "_self")}
-              alt="Manning's Steaks and Spirits Logo"
-            />
+            {data?.navLogo && (
+              <img
+                style={{
+                  maxHeight: mobile ? "80px" : "100px",
+                  cursor: "pointer",
+                }}
+                src={`${ASSET_URL}${data?.header?.logoUrl}`}
+                onClick={() => window.open("/", "_self")}
+                alt={`${data?.fullName} Logo`}
+              />
+            )}
             <div style={{ display: "flex" }}>
               <StyledButton
                 color="secondary"
                 variant="text"
-                href={`tel:${data?.phone}`}
+                href={`${data?.header?.ctaList[1].ctaLink}`}
               >
                 <PhoneInTalk style={{ marginRight: mobile ? "0" : "4px" }} />
-                {!mobile && `Contact us`}
+                {!mobile && data?.header?.ctaList[1].cta}
               </StyledButton>
             </div>
           </Toolbar>

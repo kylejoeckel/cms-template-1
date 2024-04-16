@@ -1,6 +1,10 @@
 import { useLocation } from "react-router-dom";
+import { SiteDataContext } from "../../app";
+import { useContext } from "react";
 
-export const VideoPlayer = ({ data }) => {
+export const VideoPlayer = () => {
+  const data = useContext(SiteDataContext);
+
   const location = useLocation();
   const isHome = location.pathname === "/";
   return (

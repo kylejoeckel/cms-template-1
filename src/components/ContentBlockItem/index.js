@@ -1,23 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Typography } from "@mui/material";
 import { DynamicButtons } from "../DynamicButtons";
 import useFadeInOnScroll from "../../hooks/useFadeInOnScroll";
 import { StyledButton } from "../StyledButton";
 import DynamicIcon from "../DynamicIcon";
+import { SiteDataContext } from "../../app";
+import { useTheme } from "@emotion/react";
+import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
 
 const MAX_CONTENT_LENGTH = 750;
 
-const ContentBlockItem = ({
-  content,
-  index,
-  mobile,
-  theme,
-  registerRef,
-  data,
-}) => {
+const ContentBlockItem = ({ content, index, mobile, registerRef }) => {
+  const theme = useTheme();
+  const data = useContext(SiteDataContext);
+
   const [ref, isVisible] = useFadeInOnScroll();
   const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   const imageUrl = `${ASSET_URL}${content.contentImg}`;
+  const { imageLoaded, placeholderImage } = useLazyLoadImage(imageUrl);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpandContent = () => {
@@ -48,13 +48,14 @@ const ContentBlockItem = ({
     >
       <div
         ref={(el) => registerRef && registerRef(imageUrl, el)}
+        data-bg={imageUrl}
         style={{
           order: mobile ? 0 : index % 2 === 0 ? 0 : 2,
           minHeight: "200px",
           height: "auto",
           position: "relative",
           width: mobile ? "100%" : "45%",
-          backgroundImage: `url(${imageUrl})`, // Directly set the image URL
+          backgroundImage: `url(${imageLoaded ? imageUrl : placeholderImage})`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -77,12 +78,12 @@ const ContentBlockItem = ({
               ? "rgba(255,255,255,0.8)"
               : "rgba(0,0,0,0.8)"
             : index % 2 === 0
-            ? theme.palette.background.default
-            : theme.palette.background.dark,
+            ? theme.palette?.background?.default
+            : theme.palette?.background?.dark,
           color:
             index % 2 === 0
-              ? theme.palette.text.primary
-              : theme.palette.text.secondary,
+              ? theme.palette?.text?.primary
+              : theme.palette?.text?.secondary,
         }}
         sx={{ width: mobile ? "80%" : "55%" }}
       >
@@ -129,4 +130,4 @@ const ContentBlockItem = ({
   );
 };
 
-export default ContentBlockItem;
+export default React.memo(ContentBlockItem);

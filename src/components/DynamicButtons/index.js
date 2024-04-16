@@ -19,7 +19,7 @@ export const DynamicButtons = ({ content, index }) => {
           key={idx}
           color={index % 2 === 0 ? "primary" : "info"}
           href={`${cta?.ctaLink}${safariMobile ? ".pdf" : ""}`}
-          download={safariMobile ? true : cta?.ctaDownload}
+          download={safariMobile ? true : false}
           target={safariMobile ? "_blank" : "_self"}
           rel="noopener noreferrer"
         >

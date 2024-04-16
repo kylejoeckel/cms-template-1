@@ -3,7 +3,7 @@ import GoogleMaps from "../GoogleMap";
 import { Container, useTheme } from "@mui/material";
 import ContentBlock from "../ContentBlock";
 
-const MainContainer = ({ data }) => {
+const MainContainer = () => {
   const [mobile, setMobile] = useState(false);
   const theme = useTheme();
   useEffect(() => {
@@ -21,8 +21,8 @@ const MainContainer = ({ data }) => {
       }}
     >
       <Container elevation={0}>
-        <ContentBlock data={data} mobile={mobile} />
-        <GoogleMaps data={data} />
+        <ContentBlock mobile={mobile} />
+        <GoogleMaps />
       </Container>
     </main>
   );

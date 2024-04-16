@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import {
   Dialog,
   DialogActions,
@@ -9,27 +9,28 @@ import {
   CircularProgress,
 } from "@mui/material";
 import CustomTextField from "../CustomTextField";
-import { useSnackbar } from "../../hooks/useSnackbar"; // Make sure to adjust the import path to your custom hook
+import { useSnackbar } from "../../hooks/useSnackbar";
+import { SiteDataContext } from "../../app";
 
-export const ContactModal = ({ open, setOpen, data }) => {
-  const initialState = {
-    name: "",
-    email: "",
-    message: "",
-  };
-
+export const ContactModal = ({ open, setOpen }) => {
+  const initialState = { name: "", email: "", message: "" };
   const [formValues, setFormValues] = useState(initialState);
   const [isFormValid, setIsFormValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { enqueueSnackbar, renderSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
+  const data = useContext(SiteDataContext);
 
-  useEffect(() => {
+  const validateForm = useCallback(() => {
     const isValid =
       formValues.name.trim() &&
       formValues.email.includes("@") &&
       formValues.message.trim();
     setIsFormValid(isValid);
-  }, [formValues]);
+  }, [formValues.name, formValues.email, formValues.message]);
+
+  useEffect(() => {
+    validateForm();
+  }, [formValues, validateForm]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,12 +56,10 @@ export const ContactModal = ({ open, setOpen, data }) => {
 
     try {
       const response = await fetch(
-        process.env.REACT_APP_SMTP_ENDPOINT + "dev/send_email",
+        `${process.env.REACT_APP_SMTP_ENDPOINT}dev/send_email`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             from_address: `Website Message <mail@${data?.domainName}>`,
             to_address: data?.contactEmail,
@@ -73,10 +72,12 @@ export const ContactModal = ({ open, setOpen, data }) => {
       const resData = await response.json();
       if (!response.ok)
         throw new Error(resData.message || "Failed to send email.");
-      enqueueSnackbar("Message sent successfully!", "success"); // Using the hook to enqueue the snackbar
+      enqueueSnackbar("Message sent successfully!", { variant: "success" });
       handleClose();
     } catch (error) {
-      enqueueSnackbar(error.message || "Error sending message.", "error"); // Using the hook to enqueue the snackbar
+      enqueueSnackbar(error.message || "Error sending message.", {
+        variant: "error",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -95,7 +96,7 @@ export const ContactModal = ({ open, setOpen, data }) => {
             backgroundColor: "white",
             margin: "12px",
             borderRadius: "16px",
-            padding: "16px 0px 0px 0px",
+            padding: "16px 0 0",
           },
         }}
       >
@@ -106,8 +107,8 @@ export const ContactModal = ({ open, setOpen, data }) => {
           sx={{ borderTop: "solid 2px rgba(0,0,0,0.3)", padding: "32px" }}
         >
           <DialogContentText sx={{ color: "black", marginTop: "24px" }}>
-            Send us a note with your contact info and we'll be sure to get back
-            with you as soon as we can!
+            Send us a note with your contact info and we'll get back to you as
+            soon as we can!
           </DialogContentText>
           <CustomTextField
             id="name"
@@ -149,9 +150,6 @@ export const ContactModal = ({ open, setOpen, data }) => {
           </Button>
         </DialogActions>
       </Dialog>
-      {renderSnackbar()}
     </>
   );
 };
-
-export default ContactModal;

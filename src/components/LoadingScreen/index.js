@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { SiteDataContext } from "../../app";
 
-const LoadingScreen = ({ data }) => {
+const LoadingScreen = () => {
+  const data = useContext(SiteDataContext);
+
   const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
 
   return (
