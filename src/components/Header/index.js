@@ -1,12 +1,11 @@
 import { VideoPlayer } from "../VideoPlayer";
 import "../../styles/index.css";
-import { useLocation } from "react-router-dom";
+import { useMobileView } from "../../hooks/useMobileView";
 
 export const Header = () => {
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  const mobile = useMobileView("md");
   return (
-    <header className="header" style={{ height: !isHome ? "200px" : "600px" }}>
+    <header className="header" style={{ height: mobile ? "175px" : "700px" }}>
       <VideoPlayer />
     </header>
   );

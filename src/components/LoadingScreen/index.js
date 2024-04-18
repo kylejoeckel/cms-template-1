@@ -29,7 +29,7 @@ const LoadingScreen = () => {
       {data?.mainLogo && (
         <img
           src={ASSET_URL + data?.mainLogo}
-          style={{ maxWidth: "400px" }}
+          style={{ maxWidth: "300px", margin: "60px" }}
           alt="logo"
         />
       )}

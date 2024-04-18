@@ -4,10 +4,11 @@ import { ContactCard } from "../ContactCard";
 import ContentBlockItem from "../ContentBlockItem";
 import { SiteDataContext } from "../../app";
 import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
+import { useMobileView } from "../../hooks/useMobileView";
 
-const ContentBlock = ({ mobile }) => {
+const ContentBlock = () => {
   const data = useContext(SiteDataContext);
-
+  const mobile = useMobileView("md");
   const ASSET_URL = `${data?.assetUrl}${data?.groupName}`;
   const theme = useTheme();
   const contentRefs = useRef({});
@@ -21,7 +22,6 @@ const ContentBlock = ({ mobile }) => {
   const imageUrl = `${ASSET_URL}${data?.heroImg}`;
   const { placeholderImage, imageLoaded } = useLazyLoadImage(imageUrl);
 
-
   return (
     <>
       <div
@@ -32,7 +32,7 @@ const ContentBlock = ({ mobile }) => {
         }}
       >
         <div style={{ width: mobile ? "100%" : "calc(40%)" }}>
-          <ContactCard mobile />
+          <ContactCard />
         </div>
         <div
           ref={(el) => registerRef(imageUrl, el)}
@@ -40,7 +40,9 @@ const ContentBlock = ({ mobile }) => {
           style={{
             minHeight: "200px",
             width: mobile ? "100%" : "calc(60%)",
-            backgroundImage: `url(${imageLoaded ? imageUrl : placeholderImage})`, 
+            backgroundImage: `url(${
+              imageLoaded ? imageUrl : placeholderImage
+            })`,
             backgroundPosition: "center",
             backgroundSize: "cover",
           }}
@@ -52,7 +54,6 @@ const ContentBlock = ({ mobile }) => {
           content={content}
           key={i}
           index={i}
-          mobile={mobile}
           theme={theme}
           registerRef={registerRef}
         />

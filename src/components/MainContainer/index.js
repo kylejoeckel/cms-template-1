@@ -1,15 +1,10 @@
-import { useEffect, useState } from "react";
 import GoogleMaps from "../GoogleMap";
-import { Container, useTheme } from "@mui/material";
+import { Container } from "@mui/material";
 import ContentBlock from "../ContentBlock";
+import { useMobileView } from "../../hooks/useMobileView";
 
 const MainContainer = () => {
-  const [mobile, setMobile] = useState(false);
-  const theme = useTheme();
-  useEffect(() => {
-    if (window.screen.width <= theme.breakpoints.values.md) setMobile(true);
-    if (window.screen.width >= theme.breakpoints.values.md) setMobile(false);
-  }, [theme.breakpoints.values.md]);
+  const mobile = useMobileView("md");
 
   return (
     <main
@@ -21,7 +16,7 @@ const MainContainer = () => {
       }}
     >
       <Container elevation={0}>
-        <ContentBlock mobile={mobile} />
+        <ContentBlock />
         <GoogleMaps />
       </Container>
     </main>

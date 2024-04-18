@@ -7,10 +7,12 @@ import DynamicIcon from "../DynamicIcon";
 import { SiteDataContext } from "../../app";
 import { useTheme } from "@emotion/react";
 import { useLazyLoadImage } from "../../hooks/useLazyLoadImage";
+import { useMobileView } from "../../hooks/useMobileView";
 
 const MAX_CONTENT_LENGTH = 750;
 
-const ContentBlockItem = ({ content, index, mobile, registerRef }) => {
+const ContentBlockItem = ({ content, index, registerRef }) => {
+  const mobile = useMobileView("md");
   const theme = useTheme();
   const data = useContext(SiteDataContext);
 

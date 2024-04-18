@@ -4,7 +4,9 @@ import { Card, useTheme, Box } from "@mui/material";
 import { StyledButton } from "../StyledButton";
 import { ContactModal } from "../ContactModal";
 import { SiteDataContext } from "../../app";
-import "./ContactCard.css"; // Assuming you move styles here
+import { useMobileView } from "../../hooks/useMobileView";
+import "../../styles/index.css";
+import "../../styles/ContactCard.css";
 
 const ContactInfoItem = ({ Icon, content }) => (
   <Box display="flex" alignItems="center" p={1}>
@@ -15,7 +17,8 @@ const ContactInfoItem = ({ Icon, content }) => (
   </Box>
 );
 
-export const ContactCard = ({ mobile }) => {
+export const ContactCard = () => {
+  const mobile = useMobileView("md");
   const theme = useTheme();
   const data = useContext(SiteDataContext);
   const [contactModalOpen, setContactModalOpen] = useState(false);
@@ -24,12 +27,10 @@ export const ContactCard = ({ mobile }) => {
   return (
     <Card
       elevation={0}
-      className={mobile ? "mobileContentSquare" : "contentSquare"}
       sx={{
         textAlign: "left",
-        width: mobile ? "100%" : "calc(40%)",
         backgroundColor: theme?.palette?.background?.default,
-        borderRadius: 0,
+        borderRadius: mobile ? "16px 16px 0 0" : 0,
         padding: mobile ? 0 : 2,
       }}
     >

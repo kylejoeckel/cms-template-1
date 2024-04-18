@@ -27,6 +27,7 @@ cd menu-matrix-cms-template-1
 
 # Install dependencies
 yarn install
+```
 
 Available Scripts
 -----------------
